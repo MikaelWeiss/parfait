@@ -1,2 +1,2 @@
 # Parfait
-## Parfait always requests facts and interconnected Tables
+## Parfait always requests facts and interconnected tables
