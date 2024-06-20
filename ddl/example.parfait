@@ -1,14 +1,20 @@
 model User {
     id: uuid
-    name: string
+    name: string queryable
     email: string
-    profileType: ProfileType
-    creationDate: datetime default 'now'
-    anotherDate: datetime default '2024-06-20 09:03'
+    profileType: ProfileType queryable
+    creationDate: datetime default('now') queryable
+    anotherDate: datetime default('2024-06-20 09:03')
     anOptionalValue: string?
-    friends: [User]
-    posts: [Post]
     notes: [string]?
+    friends: [Friend] relationship
+    posts: [Post] relationship
+}
+
+model Friend {
+    userOne: User
+    userTwo: User
+    friendDate: datetime
 }
 
 enum ProfileType {
