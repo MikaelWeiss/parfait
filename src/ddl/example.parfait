@@ -1,0 +1,33 @@
+model User {
+    id: uuid
+    name: string
+    email: string
+    profileType: ProfileType
+    creationDate: datetime default 'now'
+    anotherDate: datetime default '2024-06-20 09:03'
+    anOptionalValue: string?
+    friends: [User]
+    posts: [Post]
+    notes: [string]?
+}
+
+enum ProfileType {
+    personal
+    business
+}
+
+model Post {
+    id: uuid
+    user: User
+    comments: [Comment]
+    title: string
+    content: string
+    photos: [data]
+}
+
+model Comment {
+    id: uuid
+    post: Post
+    user: User
+}
+
