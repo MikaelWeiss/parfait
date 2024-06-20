@@ -1,19 +1,19 @@
+
 model User {
     id: uuid
     name: string queryable
     email: string
     profileType: ProfileType queryable
-    creationDate: datetime default('now') queryable
+    creationDate: datetime = 'now'
     anotherDate: datetime default('2024-06-20 09:03')
     anOptionalValue: string?
-    notes: [string]?
-    friends: [Friend] relationship
-    posts: [Post] relationship
+    notes: [string] { default = [], queryable = true }
+    friends: [Friend]
+    posts: $[Post]
 }
 
 model Friend {
-    userOne: User
-    userTwo: User
+    (friends, 2): User
     friendDate: datetime
 }
 
@@ -23,8 +23,7 @@ enum ProfileType {
 }
 
 model Post {
-    id: uuid
-    user: User
+    user: $User
     comments: [Comment]
     title: string
     content: string
@@ -36,4 +35,10 @@ model Comment {
     post: Post
     user: User
 }
+
+database.Posts.filter(p => p.text.contains("text")).filter(sdifasbf)
+
+let yeet = new Query<(Post, User)>();
+
+List<(Posts, User, (Comment, User))> yeet = database.fetch();
 
